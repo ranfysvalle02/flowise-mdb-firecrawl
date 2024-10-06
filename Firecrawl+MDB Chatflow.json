@@ -1,0 +1,712 @@
+{
+  "nodes": [
+    {
+      "id": "mongoDBAtlas_0",
+      "position": {
+        "x": 836.8389988081049,
+        "y": -192.8135609058403
+      },
+      "type": "customNode",
+      "data": {
+        "id": "mongoDBAtlas_0",
+        "label": "MongoDB Atlas",
+        "version": 1,
+        "name": "mongoDBAtlas",
+        "type": "MongoDB Atlas",
+        "baseClasses": [
+          "MongoDB Atlas",
+          "VectorStoreRetriever",
+          "BaseRetriever"
+        ],
+        "category": "Vector Stores",
+        "description": "Upsert embedded data and perform similarity or mmr search upon query using MongoDB Atlas, a managed cloud mongodb database",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "mongoDBUrlApi"
+            ],
+            "id": "mongoDBAtlas_0-input-credential-credential"
+          },
+          {
+            "label": "Database",
+            "name": "databaseName",
+            "placeholder": "<DB_NAME>",
+            "type": "string",
+            "id": "mongoDBAtlas_0-input-databaseName-string"
+          },
+          {
+            "label": "Collection Name",
+            "name": "collectionName",
+            "placeholder": "<COLLECTION_NAME>",
+            "type": "string",
+            "id": "mongoDBAtlas_0-input-collectionName-string"
+          },
+          {
+            "label": "Index Name",
+            "name": "indexName",
+            "placeholder": "<VECTOR_INDEX_NAME>",
+            "type": "string",
+            "id": "mongoDBAtlas_0-input-indexName-string"
+          },
+          {
+            "label": "Content Field",
+            "name": "textKey",
+            "description": "Name of the field (column) that contains the actual content",
+            "type": "string",
+            "default": "text",
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-textKey-string"
+          },
+          {
+            "label": "Embedded Field",
+            "name": "embeddingKey",
+            "description": "Name of the field (column) that contains the Embedding",
+            "type": "string",
+            "default": "embedding",
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-embeddingKey-string"
+          },
+          {
+            "label": "Top K",
+            "name": "topK",
+            "description": "Number of top results to fetch. Default to 4",
+            "placeholder": "4",
+            "type": "number",
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-topK-number"
+          },
+          {
+            "label": "Search Type",
+            "name": "searchType",
+            "type": "options",
+            "default": "similarity",
+            "options": [
+              {
+                "label": "Similarity",
+                "name": "similarity"
+              },
+              {
+                "label": "Max Marginal Relevance",
+                "name": "mmr"
+              }
+            ],
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-searchType-options"
+          },
+          {
+            "label": "Fetch K (for MMR Search)",
+            "name": "fetchK",
+            "description": "Number of initial documents to fetch for MMR reranking. Default to 20. Used only when the search type is MMR",
+            "placeholder": "20",
+            "type": "number",
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-fetchK-number"
+          },
+          {
+            "label": "Lambda (for MMR Search)",
+            "name": "lambda",
+            "description": "Number between 0 and 1 that determines the degree of diversity among the results, where 0 corresponds to maximum diversity and 1 to minimum diversity. Used only when the search type is MMR",
+            "placeholder": "0.5",
+            "type": "number",
+            "additionalParams": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-lambda-number"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Document",
+            "name": "document",
+            "type": "Document",
+            "list": true,
+            "optional": true,
+            "id": "mongoDBAtlas_0-input-document-Document"
+          },
+          {
+            "label": "Embeddings",
+            "name": "embeddings",
+            "type": "Embeddings",
+            "id": "mongoDBAtlas_0-input-embeddings-Embeddings"
+          }
+        ],
+        "inputs": {
+          "document": [
+            "{{fireCrawl_0.data.instance}}"
+          ],
+          "embeddings": "{{azureOpenAIEmbeddings_0.data.instance}}",
+          "databaseName": "sample_database",
+          "collectionName": "sample_collection",
+          "indexName": "vector_index",
+          "textKey": "text",
+          "embeddingKey": "embedding",
+          "topK": "",
+          "searchType": "similarity",
+          "fetchK": "",
+          "lambda": ""
+        },
+        "outputAnchors": [
+          {
+            "name": "output",
+            "label": "Output",
+            "type": "options",
+            "description": "",
+            "options": [
+              {
+                "id": "mongoDBAtlas_0-output-retriever-MongoDB Atlas|VectorStoreRetriever|BaseRetriever",
+                "name": "retriever",
+                "label": "MongoDB Retriever",
+                "description": "",
+                "type": "MongoDB Atlas | VectorStoreRetriever | BaseRetriever"
+              },
+              {
+                "id": "mongoDBAtlas_0-output-vectorStore-MongoDB Atlas|VectorStore",
+                "name": "vectorStore",
+                "label": "MongoDB Vector Store",
+                "description": "",
+                "type": "MongoDB Atlas | VectorStore"
+              }
+            ],
+            "default": "retriever"
+          }
+        ],
+        "outputs": {
+          "output": "retriever"
+        },
+        "selected": false
+      },
+      "width": 300,
+      "height": 753,
+      "positionAbsolute": {
+        "x": 836.8389988081049,
+        "y": -192.8135609058403
+      },
+      "selected": false,
+      "dragging": false
+    },
+    {
+      "id": "azureOpenAIEmbeddings_0",
+      "position": {
+        "x": 224.83087427022696,
+        "y": 606.854702483589
+      },
+      "type": "customNode",
+      "data": {
+        "id": "azureOpenAIEmbeddings_0",
+        "label": "Azure OpenAI Embeddings",
+        "version": 1,
+        "name": "azureOpenAIEmbeddings",
+        "type": "AzureOpenAIEmbeddings",
+        "baseClasses": [
+          "AzureOpenAIEmbeddings",
+          "Embeddings"
+        ],
+        "category": "Embeddings",
+        "description": "Azure OpenAI API to generate embeddings for a given text",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "azureOpenAIApi"
+            ],
+            "id": "azureOpenAIEmbeddings_0-input-credential-credential"
+          },
+          {
+            "label": "Batch Size",
+            "name": "batchSize",
+            "type": "number",
+            "default": "100",
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAIEmbeddings_0-input-batchSize-number"
+          },
+          {
+            "label": "Timeout",
+            "name": "timeout",
+            "type": "number",
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAIEmbeddings_0-input-timeout-number"
+          },
+          {
+            "label": "BasePath",
+            "name": "basepath",
+            "type": "string",
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAIEmbeddings_0-input-basepath-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "batchSize": "100",
+          "timeout": "",
+          "basepath": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "azureOpenAIEmbeddings_0-output-azureOpenAIEmbeddings-AzureOpenAIEmbeddings|Embeddings",
+            "name": "azureOpenAIEmbeddings",
+            "label": "AzureOpenAIEmbeddings",
+            "description": "Azure OpenAI API to generate embeddings for a given text",
+            "type": "AzureOpenAIEmbeddings | Embeddings"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 328,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 224.83087427022696,
+        "y": 606.854702483589
+      },
+      "dragging": false
+    },
+    {
+      "id": "fireCrawl_0",
+      "position": {
+        "x": 92.9022131176838,
+        "y": -76.55398610457868
+      },
+      "type": "customNode",
+      "data": {
+        "id": "fireCrawl_0",
+        "label": "FireCrawl",
+        "version": 1,
+        "name": "fireCrawl",
+        "type": "Document",
+        "baseClasses": [
+          "Document"
+        ],
+        "category": "Document Loaders",
+        "description": "Load data from URL using FireCrawl",
+        "inputParams": [
+          {
+            "label": "FireCrawl API",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "fireCrawlApi"
+            ],
+            "id": "fireCrawl_0-input-credential-credential"
+          },
+          {
+            "label": "URLs",
+            "name": "url",
+            "type": "string",
+            "description": "URL to be crawled/scraped",
+            "placeholder": "https://docs.flowiseai.com",
+            "id": "fireCrawl_0-input-url-string"
+          },
+          {
+            "label": "Crawler type",
+            "type": "options",
+            "name": "crawlerType",
+            "options": [
+              {
+                "label": "Crawl",
+                "name": "crawl",
+                "description": "Crawl a URL and all accessible subpages"
+              },
+              {
+                "label": "Scrape",
+                "name": "scrape",
+                "description": "Scrape a URL and get its content"
+              }
+            ],
+            "default": "crawl",
+            "id": "fireCrawl_0-input-crawlerType-options"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Text Splitter",
+            "name": "textSplitter",
+            "type": "TextSplitter",
+            "optional": true,
+            "id": "fireCrawl_0-input-textSplitter-TextSplitter"
+          }
+        ],
+        "inputs": {
+          "textSplitter": "{{recursiveCharacterTextSplitter_0.data.instance}}",
+          "url": "https://docs.firecrawl.dev/introduction",
+          "crawlerType": "scrape"
+        },
+        "outputAnchors": [
+          {
+            "id": "fireCrawl_0-output-fireCrawl-Document",
+            "name": "fireCrawl",
+            "label": "Document",
+            "description": "Load data from URL using FireCrawl",
+            "type": "Document"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 521,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 92.9022131176838,
+        "y": -76.55398610457868
+      },
+      "dragging": false
+    },
+    {
+      "id": "retrievalQAChain_0",
+      "position": {
+        "x": 1646.4527037226792,
+        "y": 606.8250188180403
+      },
+      "type": "customNode",
+      "data": {
+        "id": "retrievalQAChain_0",
+        "label": "Retrieval QA Chain",
+        "version": 2,
+        "name": "retrievalQAChain",
+        "type": "RetrievalQAChain",
+        "baseClasses": [
+          "RetrievalQAChain",
+          "BaseChain",
+          "Runnable"
+        ],
+        "category": "Chains",
+        "description": "QA chain to answer a question based on the retrieved documents",
+        "inputParams": [],
+        "inputAnchors": [
+          {
+            "label": "Language Model",
+            "name": "model",
+            "type": "BaseLanguageModel",
+            "id": "retrievalQAChain_0-input-model-BaseLanguageModel"
+          },
+          {
+            "label": "Vector Store Retriever",
+            "name": "vectorStoreRetriever",
+            "type": "BaseRetriever",
+            "id": "retrievalQAChain_0-input-vectorStoreRetriever-BaseRetriever"
+          },
+          {
+            "label": "Input Moderation",
+            "description": "Detect text that could generate harmful output and prevent it from being sent to the language model",
+            "name": "inputModeration",
+            "type": "Moderation",
+            "optional": true,
+            "list": true,
+            "id": "retrievalQAChain_0-input-inputModeration-Moderation"
+          }
+        ],
+        "inputs": {
+          "model": "{{azureOpenAI_0.data.instance}}",
+          "vectorStoreRetriever": "{{mongoDBAtlas_0.data.instance}}",
+          "inputModeration": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "retrievalQAChain_0-output-retrievalQAChain-RetrievalQAChain|BaseChain|Runnable",
+            "name": "retrievalQAChain",
+            "label": "RetrievalQAChain",
+            "description": "QA chain to answer a question based on the retrieved documents",
+            "type": "RetrievalQAChain | BaseChain | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 332,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1646.4527037226792,
+        "y": 606.8250188180403
+      },
+      "dragging": false
+    },
+    {
+      "id": "azureOpenAI_0",
+      "position": {
+        "x": 1313.525205177035,
+        "y": -306.2039446418447
+      },
+      "type": "customNode",
+      "data": {
+        "id": "azureOpenAI_0",
+        "label": "Azure OpenAI",
+        "version": 4,
+        "name": "azureOpenAI",
+        "type": "AzureOpenAI",
+        "baseClasses": [
+          "AzureOpenAI",
+          "BaseLLM",
+          "BaseLanguageModel",
+          "Runnable"
+        ],
+        "category": "LLMs",
+        "description": "Wrapper around Azure OpenAI large language models",
+        "inputParams": [
+          {
+            "label": "Connect Credential",
+            "name": "credential",
+            "type": "credential",
+            "credentialNames": [
+              "azureOpenAIApi"
+            ],
+            "id": "azureOpenAI_0-input-credential-credential"
+          },
+          {
+            "label": "Model Name",
+            "name": "modelName",
+            "type": "asyncOptions",
+            "loadMethod": "listModels",
+            "default": "text-davinci-003",
+            "id": "azureOpenAI_0-input-modelName-asyncOptions"
+          },
+          {
+            "label": "Temperature",
+            "name": "temperature",
+            "type": "number",
+            "step": 0.1,
+            "default": 0.9,
+            "optional": true,
+            "id": "azureOpenAI_0-input-temperature-number"
+          },
+          {
+            "label": "Max Tokens",
+            "name": "maxTokens",
+            "type": "number",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-maxTokens-number"
+          },
+          {
+            "label": "Top Probability",
+            "name": "topP",
+            "type": "number",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-topP-number"
+          },
+          {
+            "label": "Best Of",
+            "name": "bestOf",
+            "type": "number",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-bestOf-number"
+          },
+          {
+            "label": "Frequency Penalty",
+            "name": "frequencyPenalty",
+            "type": "number",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-frequencyPenalty-number"
+          },
+          {
+            "label": "Presence Penalty",
+            "name": "presencePenalty",
+            "type": "number",
+            "step": 0.1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-presencePenalty-number"
+          },
+          {
+            "label": "Timeout",
+            "name": "timeout",
+            "type": "number",
+            "step": 1,
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-timeout-number"
+          },
+          {
+            "label": "BasePath",
+            "name": "basepath",
+            "type": "string",
+            "optional": true,
+            "additionalParams": true,
+            "id": "azureOpenAI_0-input-basepath-string"
+          }
+        ],
+        "inputAnchors": [
+          {
+            "label": "Cache",
+            "name": "cache",
+            "type": "BaseCache",
+            "optional": true,
+            "id": "azureOpenAI_0-input-cache-BaseCache"
+          }
+        ],
+        "inputs": {
+          "cache": "",
+          "modelName": "gpt-4-32k",
+          "temperature": 0.9,
+          "maxTokens": "",
+          "topP": "",
+          "bestOf": "",
+          "frequencyPenalty": "",
+          "presencePenalty": "",
+          "timeout": "",
+          "basepath": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "azureOpenAI_0-output-azureOpenAI-AzureOpenAI|BaseLLM|BaseLanguageModel|Runnable",
+            "name": "azureOpenAI",
+            "label": "AzureOpenAI",
+            "description": "Wrapper around Azure OpenAI large language models",
+            "type": "AzureOpenAI | BaseLLM | BaseLanguageModel | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 574,
+      "selected": false,
+      "positionAbsolute": {
+        "x": 1313.525205177035,
+        "y": -306.2039446418447
+      },
+      "dragging": false
+    },
+    {
+      "id": "recursiveCharacterTextSplitter_0",
+      "position": {
+        "x": -357.79448711617545,
+        "y": -31.23920540289832
+      },
+      "type": "customNode",
+      "data": {
+        "id": "recursiveCharacterTextSplitter_0",
+        "label": "Recursive Character Text Splitter",
+        "version": 2,
+        "name": "recursiveCharacterTextSplitter",
+        "type": "RecursiveCharacterTextSplitter",
+        "baseClasses": [
+          "RecursiveCharacterTextSplitter",
+          "TextSplitter",
+          "BaseDocumentTransformer",
+          "Runnable"
+        ],
+        "category": "Text Splitters",
+        "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+        "inputParams": [
+          {
+            "label": "Chunk Size",
+            "name": "chunkSize",
+            "type": "number",
+            "description": "Number of characters in each chunk. Default is 1000.",
+            "default": 1000,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-chunkSize-number"
+          },
+          {
+            "label": "Chunk Overlap",
+            "name": "chunkOverlap",
+            "type": "number",
+            "description": "Number of characters to overlap between chunks. Default is 200.",
+            "default": 200,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-chunkOverlap-number"
+          },
+          {
+            "label": "Custom Separators",
+            "name": "separators",
+            "type": "string",
+            "rows": 4,
+            "description": "Array of custom separators to determine when to split the text, will override the default separators",
+            "placeholder": "[\"|\", \"##\", \">\", \"-\"]",
+            "additionalParams": true,
+            "optional": true,
+            "id": "recursiveCharacterTextSplitter_0-input-separators-string"
+          }
+        ],
+        "inputAnchors": [],
+        "inputs": {
+          "chunkSize": 1000,
+          "chunkOverlap": 200,
+          "separators": ""
+        },
+        "outputAnchors": [
+          {
+            "id": "recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+            "name": "recursiveCharacterTextSplitter",
+            "label": "RecursiveCharacterTextSplitter",
+            "description": "Split documents recursively by different characters - starting with \"\\n\\n\", then \"\\n\", then \" \"",
+            "type": "RecursiveCharacterTextSplitter | TextSplitter | BaseDocumentTransformer | Runnable"
+          }
+        ],
+        "outputs": {},
+        "selected": false
+      },
+      "width": 300,
+      "height": 430,
+      "selected": false,
+      "positionAbsolute": {
+        "x": -357.79448711617545,
+        "y": -31.23920540289832
+      },
+      "dragging": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "mongoDBAtlas_0",
+      "sourceHandle": "mongoDBAtlas_0-output-retriever-MongoDB Atlas|VectorStoreRetriever|BaseRetriever",
+      "target": "retrievalQAChain_0",
+      "targetHandle": "retrievalQAChain_0-input-vectorStoreRetriever-BaseRetriever",
+      "type": "buttonedge",
+      "id": "mongoDBAtlas_0-mongoDBAtlas_0-output-retriever-MongoDB Atlas|VectorStoreRetriever|BaseRetriever-retrievalQAChain_0-retrievalQAChain_0-input-vectorStoreRetriever-BaseRetriever"
+    },
+    {
+      "source": "fireCrawl_0",
+      "sourceHandle": "fireCrawl_0-output-fireCrawl-Document",
+      "target": "mongoDBAtlas_0",
+      "targetHandle": "mongoDBAtlas_0-input-document-Document",
+      "type": "buttonedge",
+      "id": "fireCrawl_0-fireCrawl_0-output-fireCrawl-Document-mongoDBAtlas_0-mongoDBAtlas_0-input-document-Document"
+    },
+    {
+      "source": "azureOpenAIEmbeddings_0",
+      "sourceHandle": "azureOpenAIEmbeddings_0-output-azureOpenAIEmbeddings-AzureOpenAIEmbeddings|Embeddings",
+      "target": "mongoDBAtlas_0",
+      "targetHandle": "mongoDBAtlas_0-input-embeddings-Embeddings",
+      "type": "buttonedge",
+      "id": "azureOpenAIEmbeddings_0-azureOpenAIEmbeddings_0-output-azureOpenAIEmbeddings-AzureOpenAIEmbeddings|Embeddings-mongoDBAtlas_0-mongoDBAtlas_0-input-embeddings-Embeddings"
+    },
+    {
+      "source": "azureOpenAI_0",
+      "sourceHandle": "azureOpenAI_0-output-azureOpenAI-AzureOpenAI|BaseLLM|BaseLanguageModel|Runnable",
+      "target": "retrievalQAChain_0",
+      "targetHandle": "retrievalQAChain_0-input-model-BaseLanguageModel",
+      "type": "buttonedge",
+      "id": "azureOpenAI_0-azureOpenAI_0-output-azureOpenAI-AzureOpenAI|BaseLLM|BaseLanguageModel|Runnable-retrievalQAChain_0-retrievalQAChain_0-input-model-BaseLanguageModel"
+    },
+    {
+      "source": "recursiveCharacterTextSplitter_0",
+      "sourceHandle": "recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable",
+      "target": "fireCrawl_0",
+      "targetHandle": "fireCrawl_0-input-textSplitter-TextSplitter",
+      "type": "buttonedge",
+      "id": "recursiveCharacterTextSplitter_0-recursiveCharacterTextSplitter_0-output-recursiveCharacterTextSplitter-RecursiveCharacterTextSplitter|TextSplitter|BaseDocumentTransformer|Runnable-fireCrawl_0-fireCrawl_0-input-textSplitter-TextSplitter"
+    }
+  ]
+}
