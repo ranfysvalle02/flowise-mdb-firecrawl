@@ -1,5 +1,7 @@
 # flowise-mdb-firecrawl
 
+![](no-knowledge.png)
+
 ## Why MongoDB Atlas for GenAI? 
 
 **MongoDB Atlas** is more than just a database; it's a comprehensive platform designed to handle the diverse data needs of AI applications. From **time-series data** to **complex aggregations**, Atlas provides the tools you need to efficiently manage and analyze your data.
